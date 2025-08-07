@@ -1,0 +1,56 @@
+# Overwrite or add rules to create your own house style
+#
+# # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
+# Layout/SpaceInsideArrayLiteralBrackets:
+#   Enabled: false
+
+plugins:
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-rspec_rails
+  - rubocop-factory_bot
+
+AllCops:
+  NewCops: enable
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/Documentation:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Exclude:
+    - spec/system/**
+
+RSpec/MultipleExpectations:
+  Exclude:
+    - spec/system/**
+
+Layout/EmptyLinesAroundModuleBody:
+  Enabled: true
+  EnforcedStyle: empty_lines  # blank lines inside module body
+
+Layout/EmptyLinesAroundClassBody:
+  Enabled: true
+  EnforcedStyle: empty_lines  # blank lines inside class body
+
+
+Metrics/MethodLength:
+  Exclude:
+    - 'app/views/**/*'
+    - 'app/components/**/*'
+
+Lint/MissingSuper:
+  Exclude:
+    - 'app/views/**/*'
+    - 'app/components/**/*'
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: nested
+
+Rails/DynamicFindBy:
+  Enabled: false
+
+Rails/Output:
+  Enabled: false

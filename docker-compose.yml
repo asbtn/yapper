@@ -15,7 +15,6 @@ x-web-app: &web-app
   volumes:
     - .:/rails
     - node-modules:/rails/node_modules
-    - bootsnap-cache:/rails/tmp/cache/bootsnap
 
 services:
   postgres:
@@ -36,14 +35,24 @@ services:
   web:
     <<: *web-app
     entrypoint: ./bin/docker-dev-entrypoint
-    command: bundle exec rails server -b 0.0.0.0
+    command: bin/rails server -b 0.0.0.0
+    environment:
+      RAILS_ENV: development
+      VITE_RUBY_HOST: vite
     ports:
-      - "3000:3000/tcp"
+      - "3000:3000"
     depends_on:
-      postgres:
-        condition: service_healthy
+      - vite
+      - postgres
+
+  vite:
+    <<: *web-app
+    command: bin/vite dev
+    environment:
+      VITE_RUBY_HOST: 0.0.0.0
+    ports:
+      - "3036:3036"
 
 volumes:
   postgres-data:
   node-modules:
-  bootsnap-cache:
