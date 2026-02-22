@@ -1,7 +1,9 @@
-import { Routes, Route, Navigate } from "react-router-dom";
-import { useAuth } from "./auth/useAuth";
-import HomePage from "./pages/HomePage";
-import LoginPage from "./pages/LoginPage";
+import { Routes, Route, Navigate } from 'react-router-dom';
+
+import { useAuth } from '@/features/auth/useAuth';
+import HomePage from '@/pages/HomePage';
+import LoginPage from '@/pages/LoginPage';
+import SignupPage from '@/pages/SignupPage';
 
 export function AppRoutes() {
   const { loggedIn } = useAuth();
@@ -15,6 +17,10 @@ export function AppRoutes() {
       <Route
         path="/sign-in"
         element={loggedIn ? <Navigate to="/" replace /> : <LoginPage />}
+      />
+      <Route
+        path="/sign-up"
+        element={loggedIn ? <Navigate to="/" replace /> : <SignupPage />}
       />
     </Routes>
   );

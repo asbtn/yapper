@@ -4,12 +4,12 @@ export async function apiRequest<ResponseBody>(
   path: string,
   options: RequestInit = {}
 ): Promise<ResponseBody> {
-  const jwt = localStorage.getItem("jwt");
+  const jwt = localStorage.getItem('jwt');
 
   const url = `${API_BASE_URL}${path}`;
 
   const headers: Record<string, string> = {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
     ...(options.headers as Record<string, string> | undefined),
   };
 
@@ -25,7 +25,7 @@ export async function apiRequest<ResponseBody>(
   const response = await fetch(url, requestOptions);
 
   if (!response.ok) {
-    throw new Error(`Request failed with status ${response.status}`);
+    throw await response.json();
   }
 
   const data = (await response.json()) as ResponseBody;
