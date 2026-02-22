@@ -30,8 +30,8 @@ npm run lint
 
 ## Features (planned & in progress)
 
-- [ ] User signup/login (JWT-based auth via Rails API)
-- [ ] Create an account if it doesn’t exist
+- [x] User signup/login (JWT-based auth via Rails API)
+- [x] Create an account if it doesn’t exist
 - [ ] View own profile with yaps (posts)
 - [ ] Edit profile (profile picture, bio)
 - [ ] Post new yaps
