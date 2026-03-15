@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-import { userCreateRequest } from '@/api/users';
+import { createUser } from '@/api/users';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -38,7 +38,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
       return null;
     },
     async onSubmit(values) {
-      await userCreateRequest({
+      await createUser({
         user: {
           username: values.username,
           email_address: values.emailAddress,

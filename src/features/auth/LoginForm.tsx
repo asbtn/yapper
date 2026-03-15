@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import { loginRequest } from '@/api/auth';
+import { login as loginRequest } from '@/api/auth';
 import { Button } from '@/components/ui/button';
 import {
   Card,

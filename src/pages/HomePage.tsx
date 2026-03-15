@@ -85,7 +85,6 @@ export default function HomePage() {
   function handleNewPost(e: React.FormEvent) {
     e.preventDefault();
     if (!newPostText.trim()) return;
-    console.log('New post:', newPostText);
     setNewPostText('');
   }
 
@@ -93,7 +92,7 @@ export default function HomePage() {
     <div className="mx-auto p-4 w-full max-w-150">
       {/* Composer: Avatar + textarea */}
       <form onSubmit={handleNewPost} className="flex gap-3 mb-6">
-        <Avatar className="flex-shrink-0 mt-1 w-11 h-11">
+        <Avatar className="mt-1 w-11 h-11 shrink-0">
           <AvatarFallback className="bg-primary text-primary-foreground">
             A</AvatarFallback>
         </Avatar>
@@ -106,7 +105,7 @@ export default function HomePage() {
           />
           <div className="flex justify-end mt-2">
             <Button type="submit" size="sm" className="px-6 rounded-full h-9" disabled={!newPostText.trim()}>
-              Post
+              Yap!
             </Button>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import { apiRequest } from './client';
 
-import type { User } from '@/types/User';
+import type { User } from '@/types/UserType';
 
 export type LoginRequest = {
   email_address: string;
@@ -12,7 +12,7 @@ export type LoginResponse = {
   user: User;
 };
 
-export function loginRequest(credentials: LoginRequest) {
+export function login(credentials: LoginRequest) {
   return apiRequest<LoginResponse>('/v1/sessions', {
     method: 'POST',
     body: JSON.stringify(credentials),
