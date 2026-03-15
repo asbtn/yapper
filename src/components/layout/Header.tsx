@@ -2,6 +2,7 @@
 'use client';
 import { Home, Moon, Sun } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -13,16 +14,20 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { useAuth } from '@/features/auth/useAuth';
 import useTheme from '@/hooks/useTheme';
 
-export function TopNav() {
+export function Header() {
   const location = useLocation();
   const { toggleTheme } = useTheme();
+  const navigate = useNavigate();
+
+  const { user } = useAuth();
 
   return (
     <header className="top-0 z-50 sticky bg-background/95 backdrop-blur border-border border-b w-full h-14">
       <div className="flex items-center px-4 h-full">
-        <div className="flex justify-between items-center mx-auto w-full max-w-152">
+        <div className="flex justify-between items-center gap-2 mx-auto w-full max-w-152">
           <Button
             variant="ghost"
             size="sm"
@@ -71,9 +76,8 @@ export function TopNav() {
             >
               <DropdownMenuTrigger>
                 <div className="flex items-center gap-2 truncate">
-                  <span className="font-medium text-sm">@username</span>
                   <Avatar className="w-7 h-7">
-                    <AvatarFallback className="bg-primary text-primary-foreground">A</AvatarFallback>
+                    <AvatarFallback className="bg-primary text-primary-foreground">{user?.username[0]}</AvatarFallback>
                   </Avatar>
                 </div>
               </DropdownMenuTrigger>
@@ -81,14 +85,14 @@ export function TopNav() {
             <DropdownMenuContent align="end" className="w-56">
               <DropdownMenuLabel className="font-normal">
                 <div className="flex flex-col space-y-1">
-                  <p className="font-medium text-sm">Alisa</p>
-                  <p className="text-muted-foreground text-xs">@username</p>
+                  <p className="font-medium text-sm">{user?.username}</p>
+                  <p className="text-muted-foreground text-xs">@{user?.handle}</p>
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Profile</DropdownMenuItem>
-
-              {/* Theme Toggle */}
+              <DropdownMenuItem onClick={() => navigate(`/profile/${user?.handle}`)}
+                className="w-full cursor-pointer"
+              >Profile</DropdownMenuItem>
               <DropdownMenuItem className="flex items-center gap-2 cursor-pointer" onClick={toggleTheme}>
                 <Sun className="w-4 h-4 rotate-0 dark:-rotate-90 scale-100 dark:scale-0 transition-all" />
                 <Moon className="absolute w-4 h-4 rotate-90 dark:rotate-0 scale-0 dark:scale-100 transition-all" />
@@ -96,7 +100,6 @@ export function TopNav() {
               </DropdownMenuItem>
 
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuItem>Logout</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

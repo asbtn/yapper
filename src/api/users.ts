@@ -1,6 +1,6 @@
 import { apiRequest } from './client';
 
-import type { User } from '@/types/User';
+import type { User } from '@/types/UserType';
 
 export type UserCreateRequest = {
   user: {
@@ -8,12 +8,24 @@ export type UserCreateRequest = {
     email_address: string;
     password: string;
     password_confirmation: string;
-  }
+  };
 };
 
-export function userCreateRequest(params: UserCreateRequest) {
+export function createUser(params: UserCreateRequest) {
   return apiRequest<User>('/v1/users', {
     method: 'POST',
     body: JSON.stringify(params),
+  });
+}
+
+export function getUser(id: string | number) {
+  return apiRequest<User>(`/v1/users/${id}`, {
+    method: 'GET',
+  });
+}
+
+export function getMe() {
+  return apiRequest<User>(`/v1/users/me`, {
+    method: 'GET',
   });
 }

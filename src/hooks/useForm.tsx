@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import type { RailsError } from '@/types/railsError';
+import type { RailsError } from '@/types/RailsErrorType';
 
 type UseFormOptions<Values extends Record<string, string>> = {
   initialValues: Values;
