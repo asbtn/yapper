@@ -1,13 +1,13 @@
 import { createContext } from 'react';
 
-import type { UserType } from '@/types/UserType';
+import type { User } from '@/features/users/types/user';
 
 export type AuthContextValue = {
   loggedIn: boolean;
   token: string | null;
   login: (token: string) => void;
   logout: () => void;
-  user: UserType | null;
+  user: User | null;
 };
 
 export const AuthContext = createContext<AuthContextValue | undefined>(undefined);

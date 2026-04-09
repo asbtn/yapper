@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-import { createUser } from '@/api/users';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -18,6 +17,7 @@ import {
   FieldLabel,
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
+import { createUser } from '@/features/users/api/users';
 import { useForm } from '@/hooks/useForm';
 
 // TODO: Refactor and DRY - similar logic to LoginForm

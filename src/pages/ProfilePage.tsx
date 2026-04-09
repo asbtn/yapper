@@ -3,22 +3,22 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { getUserPosts } from '@/api/posts';
-import { getUser } from '@/api/users';
-import Post from '@/components/Post';
-import PostForm from '@/components/PostForm';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import type { PostType } from '@/types/PostType';
-import type { UserType } from '@/types/UserType';
+import { getUserPosts } from '@/features/posts/api/posts';
+import PostCard from '@/features/posts/components/PostCard';
+import PostForm from '@/features/posts/components/PostForm';
+import type { Post } from '@/features/posts/types/post';
+import { getUser } from '@/features/users/api/users';
+import type { User } from '@/features/users/types/user';
 
 export default function ProfilePage() {
   const { handle } = useParams() as { handle: string };
-  const [user, setUser] = useState<UserType | null>(null);
-  const [profilePosts, setProfilePosts] = useState<PostType[]>([]);
+  const [user, setUser] = useState<User | null>(null);
+  const [profilePosts, setProfilePosts] = useState<Post[]>([]);
 
   const fetchPosts = (id: number) => {
     getUserPosts(id)
-      .then((response) => setProfilePosts(response.data))
+      .then((posts) => setProfilePosts(posts))
       .catch((error) => console.error('Error fetching posts:', error));
   };
 
@@ -27,7 +27,7 @@ export default function ProfilePage() {
       if (handle) {
         try {
           const userData = await getUser(handle);
-          setUser(userData.data.attributes);
+          setUser(userData);
         } catch (error) {
           console.error('Error fetching user:', error);
         }
@@ -41,6 +41,10 @@ export default function ProfilePage() {
       fetchPosts(user.id);
     }
   }, [user?.id]);
+
+  const handlePostCreated = (newPost: Post) => {
+    setProfilePosts((prevPosts) => [newPost, ...prevPosts]);
+  };
 
   return (
     <div className="mx-auto p-4 w-full max-w-150">
@@ -62,11 +66,11 @@ export default function ProfilePage() {
         </div>
       </section>
 
-      <PostForm />
+      <PostForm onPostCreated={handlePostCreated} />
 
       <div className="space-y-3">
         {profilePosts?.map((post) => (
-          <Post key={post.attributes.id} post={post} />
+          <PostCard key={post.id} post={post} />
         ))}
       </div>
     </div>

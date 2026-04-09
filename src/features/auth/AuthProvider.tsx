@@ -2,19 +2,19 @@ import { useEffect, useState } from 'react';
 
 import { AuthContext, type AuthContextValue } from './AuthContext';
 
-import { getMe } from '@/api/users';
-import type { UserType } from '@/types/UserType';
+import { getMe } from '@/features/users/api/users';
+import type { User } from '@/features/users/types/user';
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [token, setToken] = useState<string | null>(() => localStorage.getItem('jwt'));
-  const [user, setUser] = useState<UserType | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const fetchUser = async () => {
       if (token) {
         try {
-          const userData = await getMe();
-          setUser(userData.data.attributes);
+          const user = await getMe();
+          setUser(user);
         } catch {
           localStorage.removeItem('jwt');
           setToken(null);

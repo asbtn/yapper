@@ -9,7 +9,6 @@ export default function FollowersPage() {
   const [page, setPage] = useState(1);
   const followersPerPage = 5;
 
-  // Extended mock data (20 total)
   const allFollowers = [];
 
   const totalFollowers = allFollowers.length;
