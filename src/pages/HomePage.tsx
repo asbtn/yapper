@@ -80,8 +80,6 @@ export default function HomePage() {
     },
   ];
 
-
-
   function handleNewPost(e: React.FormEvent) {
     e.preventDefault();
     if (!newPostText.trim()) return;
@@ -90,7 +88,6 @@ export default function HomePage() {
 
   return (
     <div className="mx-auto p-4 w-full max-w-150">
-      {/* Composer: Avatar + textarea */}
       <form onSubmit={handleNewPost} className="flex gap-3 mb-6">
         <Avatar className="mt-1 w-11 h-11 shrink-0">
           <AvatarFallback className="bg-primary text-primary-foreground">
@@ -111,7 +108,6 @@ export default function HomePage() {
         </div>
       </form>
 
-      {/* Posts */}
       <div className="space-y-3">
         {posts.map((post) => (
           <article

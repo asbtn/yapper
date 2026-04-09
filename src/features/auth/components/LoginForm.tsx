@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 
-import { login as loginRequest } from '@/api/auth';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -12,11 +11,11 @@ import {
 import {
   Field,
   FieldDescription,
-  // FieldDescription,
   FieldGroup,
   FieldLabel,
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
+import { login as loginRequest } from '@/features/auth/api/auth';
 import { useAuth } from '@/features/auth/useAuth';
 import { useForm } from '@/hooks/useForm';
 import { cn } from '@/lib/utils';

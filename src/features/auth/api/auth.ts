@@ -1,6 +1,5 @@
-import { apiRequest } from './client';
-
-import type { User } from '@/types/UserType';
+import { apiRequest } from '@/api/client';
+import type { User } from '@/features/users/types/user';
 
 export type LoginRequest = {
   email_address: string;
